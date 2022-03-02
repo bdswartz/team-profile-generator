@@ -1,5 +1,20 @@
+// Card HTML Template
+<div class="col-3 border border-2 border-dark rounded-3 px-0 shadow my-4 mx-2">
+    <div class="bg-secondary bg-gradient text-white fw-bold p-2">
+        <h3>name</h3>
+        <h4>role</h4>
+    </div>
+<ul class="list-group py-4 px-2 bg-secondary bg-opacity-10">    
+        <li class="list-group-item rounded my-2 shadow-sm">ID: id</li>
+        <a class="list-group-item rounded my-2 shadow-sm" href="mailto:email">Email: email</a>
+        <li class="list-group-item rounded my-2 shadow-sm">Office,GitHub,School: officeNumber, github, school</li>
+    </ul>
+</div>
+// End Card Template Section
 
 
+
+// Main HTML Section
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -24,4 +39,6 @@
     </body>
     </html>
     `
+    // End Main HTML Section
+    
     module.exports =
