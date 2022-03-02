@@ -1,5 +1,8 @@
 const inquirer = require("inquirer");
 const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+
 
 let employeeArray = [];
 
@@ -37,7 +40,8 @@ const getManagerInfo = () => {
 };
 
 const addEmployees = () => {
-    return inquirer.prompt([
+    console.log(employeeArray);
+    inquirer.prompt([
         {
             type: 'list',
             name: 'role',
@@ -45,22 +49,37 @@ const addEmployees = () => {
             choices: ["Engineer", "Intern", "None"],
         }
     ])
-    .then(role => {
-        switch (role) {
+    .then(data => {
+        switch(data.role) {
             case 'Engineer':
-              getEngineerInfo();
-              break;
+                console.log("role1");
+                getEngineerInfo()
+                .then(engineerInfo => {
+                    const engineer = new Engineer(engineerInfo.name,engineerInfo.id,
+                        engineerInfo.email, engineerInfo.github);
+                    employeeArray.push(engineer);
+                    return addEmployees();
+                });
+                break;
             case 'Intern':
-              getInternInfo();
-              break;
+                console.log("role2");
+                getInternInfo()
+                .then(internInfo => {
+                    const intern = new Intern(internInfo.name,internInfo.id,
+                        internInfo.email, internInfo.school);
+                    employeeArray.push(intern);
+                    return addEmployees();
+                });
+                break;
             case 'None':
-
-          }
+                console.log("You have quit adding employees")
+                break;
+          };
     })
 }
 
-const getEngineerInfo = (employeeInfo) => {
-    inquirer.prompt([
+const getEngineerInfo = () => {
+    return inquirer.prompt([
         {
             type: 'input',
             name: 'name',
@@ -99,8 +118,8 @@ const getEngineerInfo = (employeeInfo) => {
     }])
 };
 
-const getInternInfo = (employeeInfo) => {
-    inquirer.prompt([
+const getInternInfo = () => {
+    return inquirer.prompt([
         {
             type: 'input',
             name: 'name',
@@ -145,15 +164,9 @@ getManagerInfo()
       employeeArray.push(manager);
   })
   .then(addEmployees)
-  .then()
+  .then;
 //  
 //   .then(writeFileResponse => {
 //     console.log(writeFileResponse);
 //     return copyFile();
 //   })
-//   .then(copyFileResponse => {
-//     console.log(copyFileResponse);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
