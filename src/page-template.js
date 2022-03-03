@@ -2,6 +2,7 @@ const Engineer = require("../lib/Engineer");
 const Manager = require("../lib/Manager");
 const Intern = require("../lib/Intern");
 
+
 const employeeCards = employeeArray => {
     console.log(employeeArray);
 return `
@@ -35,7 +36,7 @@ ${employeeArray
     <ul class="list-group py-4 px-2 bg-secondary bg-opacity-10">    
             <li class="list-group-item rounded my-2 shadow-sm">ID: ${employee.id}</li>
             <a class="list-group-item rounded my-2 shadow-sm" href="mailto:${employee.email}">Email: ${employee.email}</a>
-            <a class="list-group-item rounded my-2 shadow-sm" href="https://github.com/${employee.github}>GitHub: https://github.com/${employee.github}</a>
+            <a class="list-group-item rounded my-2 shadow-sm" href="https://github.com/ target="_blank"${employee.github}>GitHub: https://github.com/${employee.github}</a>
         </ul>
     </div>
     `;

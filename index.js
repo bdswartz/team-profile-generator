@@ -3,6 +3,7 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const generatePage = require("./src/page-template");
+const fs = require('fs');
 
 
 let employeeArray = [];
@@ -39,6 +40,24 @@ const getManagerInfo = () => {
         }
     ]);
 };
+const createFile = (content) => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile('./dist/index.html', content, err => {
+            // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
+            if (err) {
+            reject(err);
+            // return out of the function here to make sure the Promise doesn't accidentally execute the resolve() function as well
+            return;
+            }
+
+            // if everything went well, resolve the Promise and send the successful data to the `.then()` method
+            resolve({
+            ok: true,
+            message: 'File created!'
+            });
+        });
+    })
+};
 
 const addEmployees = () => {
     console.log(employeeArray);
@@ -74,7 +93,8 @@ const addEmployees = () => {
                 break;
             case 'None':
                 console.log("You have quit adding employees")
-                console.log(generatePage(employeeArray));
+                const content = generatePage(employeeArray);
+                createFile(content);
                 break;
           };
     })
