@@ -1,20 +1,70 @@
-// Card HTML Template
+const Engineer = require("../lib/Engineer");
+const Manager = require("../lib/Manager");
+const Intern = require("../lib/Intern");
+
+const employeeCards = employeeArray => {
+    console.log(employeeArray);
+return `
+${employeeArray
+.filter(employee => employee instanceof Manager)
+.map((employee) => {
+    return`
 <div class="col-3 border border-2 border-dark rounded-3 px-0 shadow my-4 mx-2">
     <div class="bg-secondary bg-gradient text-white fw-bold p-2">
-        <h3>name</h3>
-        <h4>role</h4>
+        <h3>${employee.name}</h3>
+        <h4>Manager</h4>
     </div>
 <ul class="list-group py-4 px-2 bg-secondary bg-opacity-10">    
-        <li class="list-group-item rounded my-2 shadow-sm">ID: id</li>
-        <a class="list-group-item rounded my-2 shadow-sm" href="mailto:email">Email: email</a>
-        <li class="list-group-item rounded my-2 shadow-sm">Office,GitHub,School: officeNumber, github, school</li>
+        <li class="list-group-item rounded my-2 shadow-sm">ID: ${employee.id}</li>
+        <a class="list-group-item rounded my-2 shadow-sm" href="mailto:${employee.email}">Email: ${employee.email}</a>
+        <li class="list-group-item rounded my-2 shadow-sm">Office: ${employee.officeNumber}</li>
     </ul>
 </div>
-// End Card Template Section
+`;
+})
+.join('')}
+${employeeArray
+    .filter(employee => employee instanceof Engineer)
+    .map((employee) => {
+        return`
+    <div class="col-3 border border-2 border-dark rounded-3 px-0 shadow my-4 mx-2">
+        <div class="bg-secondary bg-gradient text-white fw-bold p-2">
+            <h3>${employee.name}</h3>
+            <h4>Engineer</h4>
+        </div>
+    <ul class="list-group py-4 px-2 bg-secondary bg-opacity-10">    
+            <li class="list-group-item rounded my-2 shadow-sm">ID: ${employee.id}</li>
+            <a class="list-group-item rounded my-2 shadow-sm" href="mailto:${employee.email}">Email: ${employee.email}</a>
+            <a class="list-group-item rounded my-2 shadow-sm" href="https://github.com/${employee.github}>GitHub: https://github.com/${employee.github}</a>
+        </ul>
+    </div>
+    `;
+    })
+    .join('')}
+${employeeArray
+    .filter(employee => employee instanceof Intern)
+    .map((employee) => {
+        return`
+    <div class="col-3 border border-2 border-dark rounded-3 px-0 shadow my-4 mx-2">
+        <div class="bg-secondary bg-gradient text-white fw-bold p-2">
+            <h3>${employee.name}</h3>
+            <h4>Intern</h4>
+        </div>
+    <ul class="list-group py-4 px-2 bg-secondary bg-opacity-10">    
+            <li class="list-group-item rounded my-2 shadow-sm">ID: ${employee.id}</li>
+            <a class="list-group-item rounded my-2 shadow-sm" href="mailto:${employee.email}">Email: ${employee.email}</a>
+            <li class="list-group-item rounded my-2 shadow-sm">School: ${employee.school}</li>
+        </ul>
+    </div>
+    `;
+    })
+    .join('')}
+    `
+};
 
 
-
-// Main HTML Section
+const generatePage = employeeArray => {
+    console.log(employeeArray);
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -33,12 +83,12 @@
         </div>
         <div class="container my-5 w-100">
                 <div class="row justify-content-around w-100">
+                ${employeeCards(employeeArray)}
                 </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
     </html>
-    `
-    // End Main HTML Section
-    
-    module.exports =
+    `};
+
+    module.exports = generatePage

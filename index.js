@@ -2,6 +2,7 @@ const inquirer = require("inquirer");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const generatePage = require("./src/page-template");
 
 
 let employeeArray = [];
@@ -41,7 +42,7 @@ const getManagerInfo = () => {
 
 const addEmployees = () => {
     console.log(employeeArray);
-    inquirer.prompt([
+    return inquirer.prompt([
         {
             type: 'list',
             name: 'role',
@@ -73,6 +74,7 @@ const addEmployees = () => {
                 break;
             case 'None':
                 console.log("You have quit adding employees")
+                console.log(generatePage(employeeArray));
                 break;
           };
     })
@@ -163,8 +165,14 @@ getManagerInfo()
       const manager = new Manager(managerInfo.name, managerInfo.id, managerInfo.email, managerInfo.office);
       employeeArray.push(manager);
   })
-  .then(addEmployees)
-  .then;
+  .then(addEmployees);
+//   .then(pageData => {
+//       console.log(pageData);
+//       return generatePage(pageData);
+// })
+//   .then(pageHTML => {
+//     return writeFile(pageHTML);
+//   })
 //  
 //   .then(writeFileResponse => {
 //     console.log(writeFileResponse);
