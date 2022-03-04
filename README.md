@@ -75,5 +75,6 @@ Team Generator is designed to create an HTML page output based on user input at 
 ## Tests
 npm test - Uses Jest testing package.
 
+Screen shot of the html output rendered in Google Chrome 
 ![Example HTML output file](./assets/example-html-output.jpg "Example HTML Output")
 

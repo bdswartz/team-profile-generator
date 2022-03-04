@@ -4,8 +4,6 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const generatePage = require("./src/page-template");
 const fs = require('fs');
-
-
 let employeeArray = [];
 
 validateEmail = input => {
@@ -14,7 +12,7 @@ validateEmail = input => {
     return returnBool;
   };
   
-  const createFile = (content) => {
+const createFile = (content) => {
       return new Promise((resolve, reject) => {
           fs.writeFile('./dist/index.html', content, err => {
               // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
@@ -53,7 +51,7 @@ const getManagerInfo = () => {
             name: 'id',
             message: 'What is the employee ID? (Required)',
             validate: nameInput => {
-                if (!isNaN(nameInput)) {
+                if (nameInput) {
                     return true;
                 } else {
                     console.log('Please enter a valid employee ID');
@@ -79,7 +77,7 @@ const getManagerInfo = () => {
             name: 'office',
             message: 'Please enter the office number of the Manager (Required).',
             validate: nameInput => {
-                if (!isNaN(nameInput)) {
+                if (nameInput) {
                     return true;
                 } else {
                     console.log('Please enter a valid office number!');
@@ -91,7 +89,6 @@ const getManagerInfo = () => {
 };
 
 const addEmployees = () => {
-    console.log(employeeArray);
     return inquirer.prompt([
         {
             type: 'list',
@@ -103,7 +100,6 @@ const addEmployees = () => {
     .then(data => {
         switch(data.role) {
             case 'Engineer':
-                console.log("role1");
                 getEngineerInfo()
                 .then(engineerInfo => {
                     const engineer = new Engineer(engineerInfo.name,engineerInfo.id,
@@ -113,7 +109,6 @@ const addEmployees = () => {
                 });
                 break;
             case 'Intern':
-                console.log("role2");
                 getInternInfo()
                 .then(internInfo => {
                     const intern = new Intern(internInfo.name,internInfo.id,
@@ -151,7 +146,7 @@ const getEngineerInfo = () => {
             name: 'id',
             message: 'What is the employee ID? (Required)',
             validate: nameInput => {
-                if (!isNaN(nameInput)) {
+                if (nameInput) {
                     return true;
                 } else {
                     console.log('Please enter a valid employee number!');
@@ -207,7 +202,7 @@ const getInternInfo = () => {
             name: 'id',
             message: 'What is the employee ID? (Required)',
             validate: nameInput => {
-                if (!isNaN(nameInput)) {
+                if (nameInput) {
                     return true;
                 } else {
                     console.log('Please enter a valid employee number!');
